@@ -69,6 +69,7 @@ namespace BE.Areas.Admin.Controllers
             }
             item.Key = update.Key;
             item.Value = update.Value;
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
@@ -78,6 +79,7 @@ namespace BE.Areas.Admin.Controllers
             Settings item = await _context.Settings.FirstOrDefaultAsync(x => x.Id == id);
             if (item == null) return NotFound();
             _context.Settings.Remove(item);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

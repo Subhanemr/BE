@@ -147,6 +147,8 @@ namespace BE.Areas.Admin.Controllers
             item.GoogleLink = item.GoogleLink;
             item.PositionId = item.PositionId;
 
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Delete(int id)
@@ -156,6 +158,7 @@ namespace BE.Areas.Admin.Controllers
             if (item == null) return NotFound();
             item.Img.DeleteAsync(_env.WebRootPath, "assets", "img");
             _context.Employees.Remove(item);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

@@ -68,6 +68,8 @@ namespace BE.Areas.Admin.Controllers
             }
             item.Name = update.Name;
 
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Delete(int id)
@@ -76,6 +78,7 @@ namespace BE.Areas.Admin.Controllers
             Position item = await _context.Positions.FirstOrDefaultAsync(x => x.Id == id);
             if (item == null) return NotFound();
             _context.Positions.Remove(item);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }
